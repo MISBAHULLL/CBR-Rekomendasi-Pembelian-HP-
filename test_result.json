@@ -1,0 +1,101 @@
+{
+  "success": true,
+  "message": "Ditemukan 2 rekomendasi HP",
+  "total_results": 2,
+  "query_summary": {
+    "budget": "Rp 0 - Rp 8,000,000",
+    "ram": "8 GB"
+  },
+  "weights_used": {
+    "Harga": 25.0,
+    "Ram": 15.0,
+    "Memori_internal": 10.0,
+    "Kapasitas_baterai": 15.0,
+    "Resolusi_kamera": 15.0,
+    "Ukuran_layar": 5.0,
+    "Rating_pengguna": 15.0
+  },
+  "recommendations": [
+    {
+      "rank": 1,
+      "phone": {
+        "Id_hp": 118,
+        "Nama_hp": "Asus Max 30",
+        "Brand": "Asus",
+        "Harga": 7866160,
+        "Ram": 8,
+        "Memori_internal": 512,
+        "Ukuran_layar": 6.4,
+        "Resolusi_kamera": "12MP",
+        "Kapasitas_baterai": 4500,
+        "Os": "Android",
+        "Rating_pengguna": 3.8,
+        "Tahun_rilis": "2020-11-08T00:00:00",
+        "Stok_tersedia": false
+      },
+      "similarity_score": 0.9971560816908309,
+      "similarity_percentage": 99.72,
+      "explanations": [
+        {
+          "attribute": "Ram",
+          "user_value": "8 GB",
+          "phone_value": "8 GB",
+          "match_score": 1,
+          "contribution": 15.0
+        },
+        {
+          "attribute": "Harga",
+          "user_value": "8,000,000 Rp",
+          "phone_value": "7,866,160 Rp",
+          "match_score": 0.98,
+          "contribution": 24.58
+        }
+      ],
+      "match_highlights": [
+        "✓ Harga sesuai budget",
+        "✓ RAM memenuhi kebutuhan"
+      ]
+    },
+    {
+      "rank": 2,
+      "phone": {
+        "Id_hp": 412,
+        "Nama_hp": "OnePlus Max 16",
+        "Brand": "OnePlus",
+        "Harga": 8152872,
+        "Ram": 8,
+        "Memori_internal": 256,
+        "Ukuran_layar": 6.7,
+        "Resolusi_kamera": "48MP",
+        "Kapasitas_baterai": 5000,
+        "Os": "Android",
+        "Rating_pengguna": 3.0,
+        "Tahun_rilis": "9/25/2021",
+        "Stok_tersedia": true
+      },
+      "similarity_score": 0.9967529906313102,
+      "similarity_percentage": 99.68,
+      "explanations": [
+        {
+          "attribute": "Ram",
+          "user_value": "8 GB",
+          "phone_value": "8 GB",
+          "match_score": 1,
+          "contribution": 15.0
+        },
+        {
+          "attribute": "Harga",
+          "user_value": "8,000,000 Rp",
+          "phone_value": "8,152,872 Rp",
+          "match_score": 0.98,
+          "contribution": 24.53
+        }
+      ],
+      "match_highlights": [
+        "✓ RAM memenuhi kebutuhan",
+        "🔋 Baterai jumbo"
+      ]
+    }
+  ],
+  "timestamp": "2025-12-09T00:55:25.522340"
+}

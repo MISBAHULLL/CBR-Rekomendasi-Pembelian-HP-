@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "results": [
+    {
+      "scenario": "70-30",
+      "metrics": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0
+      },
+      "evaluated_at": "2025-12-09T01:02:48.617181"
+    },
+    {
+      "scenario": "80-19",
+      "metrics": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0
+      },
+      "evaluated_at": "2025-12-09T01:03:59.481611"
+    }
+  ]
+}

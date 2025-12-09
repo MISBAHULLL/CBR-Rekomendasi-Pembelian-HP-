@@ -1,0 +1,81 @@
+{
+  "success": true,
+  "message": "Evaluation completed successfully",
+  "best_scenario": "70-30",
+  "scenarios": [
+    {
+      "name": "70-30",
+      "train_size": 700,
+      "test_size": 300,
+      "metrics": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0
+      },
+      "confusion_matrix": {
+        "matrix": [
+          [
+            300
+          ]
+        ],
+        "labels": [
+          "Tidak Relevan",
+          "Relevan"
+        ],
+        "tp": 300,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    {
+      "name": "80-19",
+      "train_size": 800,
+      "test_size": 200,
+      "metrics": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0
+      },
+      "confusion_matrix": {
+        "matrix": [
+          [
+            200
+          ]
+        ],
+        "labels": [
+          "Tidak Relevan",
+          "Relevan"
+        ],
+        "tp": 200,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  ],
+  "comparison_summary": {
+    "total_scenarios": 2,
+    "metrics_comparison": {
+      "70-30": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0
+      },
+      "80-19": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0
+      }
+    },
+    "average_metrics": {
+      "accuracy": 100.0,
+      "f1_score": 100.0
+    }
+  },
+  "timestamp": "2025-12-09T00:58:36.769131"
+}

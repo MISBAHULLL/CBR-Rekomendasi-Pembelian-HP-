@@ -1,3 +1,4 @@
+// untuk styleing phone card
 import { motion } from 'framer-motion';
 import { formatRupiah, getSimilarityColor, getBrandConfig } from '../utils/helpers';
 import { FiCpu, FiHardDrive, FiBattery, FiCamera, FiStar, FiMonitor } from 'react-icons/fi';

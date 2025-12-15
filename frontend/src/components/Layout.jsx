@@ -1,3 +1,5 @@
+// untuk styleing heeder footer dan navigation dom
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,7 +32,7 @@ export default function Layout({ children }) {
                         </div>
                         <div>
                             <h1 className="text-xl font-bold text-white">PhoneMatch</h1>
-                            <p className="text-xs text-gray-400">AI Recommendation</p>
+                            <p className="text-xs text-gray-400">Sistem Rekomendasi HP</p>
                         </div>
                     </Link>
 
@@ -125,7 +127,7 @@ export default function Layout({ children }) {
             <footer className="border-t border-white/10 py-8 px-6">
                 <div className="max-w-7xl mx-auto text-center">
                     <p className="text-gray-500 text-sm">
-                        © 2024 PhoneMatch AI - Sistem Rekomendasi HP dengan Case-Based Reasoning
+                        © 2025 CBR Phone Recommendation - Sistem Rekomendasi HP dengan Case-Based Reasoning
                     </p>
                     <p className="text-gray-600 text-xs mt-2">
                         Menggunakan Weighted Euclidean Distance untuk perhitungan similarity

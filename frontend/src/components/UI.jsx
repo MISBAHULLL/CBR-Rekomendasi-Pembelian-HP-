@@ -1,3 +1,4 @@
+// untuk styleing loading
 import { motion } from 'framer-motion';
 
 export function Loading({ size = 'md', text = 'Memuat...' }) {

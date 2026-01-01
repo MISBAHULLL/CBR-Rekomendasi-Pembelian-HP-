@@ -1,7 +1,5 @@
 """
-Phone Models
-============
-Pydantic models untuk data handphone dan request/response API.
+Pydantic models untuk data HP dan API request/response
 """
 
 from pydantic import BaseModel, Field, validator

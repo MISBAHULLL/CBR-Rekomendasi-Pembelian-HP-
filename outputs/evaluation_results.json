@@ -1,0 +1,38 @@
+{
+  "70-30": {
+    "scenario_name": "70-30",
+    "train_size": 700,
+    "test_size": 300,
+    "k_neighbors": 5,
+    "metrics": {
+      "accuracy": 76.0,
+      "precision": 75.96,
+      "recall": 76.0,
+      "f1_score": 75.74
+    },
+    "confusion_matrix": [
+      [
+        24,
+        8,
+        9
+      ],
+      [
+        7,
+        122,
+        17
+      ],
+      [
+        1,
+        30,
+        82
+      ]
+    ],
+    "labels": [
+      "Gaming",
+      "Photographer",
+      "Daily"
+    ],
+    "classification_report": "              precision    recall  f1-score   support\n\n      Gaming       0.75      0.59      0.66        41\nPhotographer       0.76      0.84      0.80       146\n       Daily       0.76      0.73      0.74       113\n\n    accuracy                           0.76       300\n   macro avg       0.76      0.72      0.73       300\nweighted avg       0.76      0.76      0.76       300\n",
+    "timestamp": "2025-12-22T10:19:15.600800"
+  }
+}

@@ -1,7 +1,5 @@
 """
-Admin Routes
-============
-API endpoints untuk admin dashboard dan manajemen.
+API endpoints untuk admin dashboard
 """
 
 from fastapi import APIRouter, HTTPException, Body

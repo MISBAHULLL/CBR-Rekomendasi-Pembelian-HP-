@@ -1,15 +1,6 @@
 """
-CBR Engine Module
-=================
-Case-Based Reasoning Engine untuk Sistem Rekomendasi Handphone.
-
-Implementasi lengkap 4 fase CBR (R4):
-1. RETRIEVE - Mengambil kasus yang mirip dari case base
-2. REUSE - Menggunakan solusi dari kasus yang mirip
-3. REVISE - Menyesuaikan solusi jika diperlukan
-4. RETAIN - Menyimpan kasus baru yang berhasil
-
-Menggunakan Weighted Euclidean Distance untuk perhitungan similarity.
+CBR Engine - Case-Based Reasoning untuk rekomendasi HP
+Implementasi 4 fase: Retrieve, Reuse, Revise, Retain
 """
 
 import pandas as pd
@@ -28,24 +19,8 @@ logger = logging.getLogger(__name__)
 
 class CBREngine:
     """
-    Case-Based Reasoning Engine untuk rekomendasi handphone.
-    
-    Mengimplementasikan siklus CBR lengkap:
-    - Retrieve: Mencari HP yang mirip dengan preferensi user
-    - Reuse: Menggunakan HP tersebut sebagai rekomendasi
-    - Revise: Menyesuaikan ranking berdasarkan preferensi tambahan
-    - Retain: Menyimpan feedback untuk pembelajaran
-    
-    Attributes:
-        case_base: DataFrame berisi semua HP dalam database
-        preprocessor: DataPreprocessor untuk normalisasi
-        distance_calculator: WeightedEuclideanDistance untuk similarity
-        weights: Bobot atribut dalam persentase
-    
-    Example:
-        >>> engine = CBREngine()
-        >>> engine.load_case_base("data.xlsx")
-        >>> recommendations = engine.recommend(user_preferences, top_k=10)
+    CBR Engine untuk rekomendasi HP dengan Weighted Euclidean Distance.
+    Cycle: Retrieve -> Reuse -> Revise -> Retain
     """
     
     def __init__(self, weights: Dict[str, float] = None):

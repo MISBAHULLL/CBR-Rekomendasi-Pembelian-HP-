@@ -1,13 +1,5 @@
 """
-Data Preprocessing Module
-=========================
-Modul untuk preprocessing data handphone sebelum digunakan dalam CBR.
-
-Fitur:
-- Normalisasi Min-Max
-- Handle Missing Values
-- Encode Categorical Variables
-- Parse Camera Resolution
+Preprocessing data HP - normalisasi, missing values, dan encoding.
 """
 
 import pandas as pd
@@ -21,17 +13,7 @@ logger = logging.getLogger(__name__)
 
 class DataPreprocessor:
     """
-    Class untuk preprocessing data handphone.
-    
-    Melakukan:
-    1. Normalisasi numerik (Min-Max Scaling)
-    2. Handle missing values dengan fallback logic
-    3. Encode categorical (Brand, OS, Camera Resolution)
-    4. Parse dan convert data types
-    
-    Example:
-        >>> preprocessor = DataPreprocessor()
-        >>> normalized_df = preprocessor.fit_transform(df)
+    Preprocessor: Min-Max normalisasi, handle missing values, encode categorical.
     """
     
     # Mapping resolusi kamera ke nilai numerik (dalam MP)

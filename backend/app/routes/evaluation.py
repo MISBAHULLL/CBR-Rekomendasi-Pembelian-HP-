@@ -1,7 +1,5 @@
 """
-Evaluation Routes
-=================
-API endpoints untuk evaluasi model CBR.
+API endpoints untuk evaluasi model CBR
 """
 
 from fastapi import APIRouter, HTTPException, BackgroundTasks
@@ -19,10 +17,9 @@ class EvaluationConfig(BaseModel):
     """Konfigurasi untuk menjalankan evaluasi."""
     scenarios: List[Dict[str, int]] = Field(
         default=[
-            {"train": 70, "test": 30},
-            {"train": 80, "test": 20}
+            {"train": 70, "test": 30}
         ],
-        description="Skenario train-test split"
+        description="Skenario train-test split (70% training, 30% testing)"
     )
     similarity_threshold: float = Field(
         default=0.5,

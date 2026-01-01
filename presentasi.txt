@@ -1,0 +1,613 @@
+================================================================================
+          PRESENTASI SISTEM REKOMENDASI HANDPHONE BERBASIS CBR
+                    (Case-Based Reasoning)
+================================================================================
+
+Nama Sistem    : PhoneMatch AI - Sistem Rekomendasi HP Cerdas
+Metode         : Case-Based Reasoning dengan Weighted Euclidean Distance
+Dataset        : 1000 data handphone
+Akurasi Model  : 76%
+
+================================================================================
+                           DAFTAR ISI
+================================================================================
+1. OVERVIEW SISTEM
+2. TECHNOLOGY STACK
+3. FITUR-FITUR UI
+4. OUTPUT EVALUASI & VISUALISASI
+5. STRUKTUR PROJECT
+6. PENJELASAN SETIAP FILE
+7. CARA KERJA ALGORITMA
+8. CARA MENJALANKAN APLIKASI
+
+================================================================================
+                      1. OVERVIEW SISTEM
+================================================================================
+
+Sistem ini adalah aplikasi web untuk merekomendasikan handphone berdasarkan 
+preferensi pengguna menggunakan metode Case-Based Reasoning (CBR).
+
+TUJUAN SISTEM:
+- Membantu pengguna menemukan HP yang sesuai dengan kebutuhan
+- Memberikan rekomendasi berdasarkan similarity/kemiripan
+- Mengklasifikasikan HP ke dalam 3 kategori: Gaming, Photographer, Daily
+
+METODE YANG DIGUNAKAN:
+- Case-Based Reasoning (CBR) dengan 4 tahap: Retrieve, Reuse, Revise, Retain
+- Weighted Euclidean Distance untuk menghitung similarity
+- Majority Voting dengan K=5 untuk klasifikasi
+
+ATRIBUT YANG DIGUNAKAN:
+┌─────────────────────┬─────────┬────────────────────────────────────┐
+│ Atribut             │ Bobot   │ Keterangan                         │
+├─────────────────────┼─────────┼────────────────────────────────────┤
+│ Harga               │ 20%     │ Harga handphone                    │
+│ RAM                 │ 20%     │ Kapasitas RAM (GB)                 │
+│ Resolusi Kamera     │ 20%     │ Megapixel kamera utama             │
+│ Kapasitas Baterai   │ 15%     │ Kapasitas baterai (mAh)            │
+│ Memori Internal     │ 10%     │ Penyimpanan internal (GB)          │
+│ Rating Pengguna     │ 10%     │ Rating 1-5                         │
+│ Ukuran Layar        │ 5%      │ Diagonal layar (inch)              │
+└─────────────────────┴─────────┴────────────────────────────────────┘
+Total Bobot: 100%
+
+================================================================================
+                      2. TECHNOLOGY STACK
+================================================================================
+
+FRONTEND:
+┌────────────────────────────────────────────────────────────────────────────┐
+│ Framework      : React.js (Vite)                                           │
+│ Styling        : TailwindCSS                                               │
+│ State          : React Hooks (useState, useEffect)                         │
+│ HTTP Client    : Axios                                                     │
+│ Visualisasi    : Chart.js + react-chartjs-2                                │
+│ Animasi        : Framer Motion                                             │
+│ Notifikasi     : React Hot Toast                                           │
+│ Icons          : React Icons (Feather Icons)                               │
+│ Routing        : React Router DOM                                          │
+└────────────────────────────────────────────────────────────────────────────┘
+
+BACKEND:
+┌────────────────────────────────────────────────────────────────────────────┐
+│ Framework      : FastAPI (Python)                                          │
+│ Server         : Uvicorn (ASGI)                                            │
+│ Data Processing: Pandas, NumPy                                             │
+│ ML Metrics     : Scikit-learn                                              │
+│ Validation     : Pydantic                                                  │
+│ Visualisasi    : Matplotlib, Seaborn                                       │
+│ Excel Parser   : OpenPyXL                                                  │
+│ API Docs       : Swagger UI (auto-generated)                               │
+└────────────────────────────────────────────────────────────────────────────┘
+
+DATABASE/STORAGE:
+┌────────────────────────────────────────────────────────────────────────────┐
+│ Dataset        : Excel (.xlsx) - 1000 data HP                              │
+│ Processed Data : CSV files (train/test split)                              │
+│ Results        : JSON, TXT, PNG                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                      3. FITUR-FITUR UI
+================================================================================
+
+A. HALAMAN HOME (/)
+─────────────────────────────────────────────────────────────────────────────
+   • Hero section dengan penjelasan singkat sistem
+   • Statistik dataset (jumlah HP, brand, range harga)
+   • Quick navigation ke fitur lain
+   • Animasi modern dengan gradient
+
+B. HALAMAN DAFTAR HP (/phones)
+─────────────────────────────────────────────────────────────────────────────
+   • Menampilkan semua 1000 HP dalam database
+   • Fitur pencarian berdasarkan nama/brand
+   • Filter berdasarkan: Brand, Range Harga, RAM
+   • Pagination dengan 20 item per halaman
+   • Card HP dengan gambar, spesifikasi, dan harga
+
+C. HALAMAN REKOMENDASI (/recommendation)
+─────────────────────────────────────────────────────────────────────────────
+   Input yang diminta:
+   • Range Harga (slider)
+   • RAM minimum (dropdown)
+   • Memori Internal minimum (dropdown)
+   • Ukuran Layar (slider)
+   • Kapasitas Baterai minimum (slider)
+   • Rating minimum (slider)
+   
+   Output:
+   • 10 HP teratas yang paling mirip
+   • Similarity score dalam persentase
+   • Detail spesifikasi setiap HP
+   • Penjelasan mengapa HP tersebut direkomendasikan
+
+D. HALAMAN EVALUASI (/evaluation)
+─────────────────────────────────────────────────────────────────────────────
+   Menampilkan hasil evaluasi model CBR:
+   
+   1. METRIK EVALUASI:
+      ┌─────────────┬───────────┐
+      │ Metrik      │ Nilai     │
+      ├─────────────┼───────────┤
+      │ Accuracy    │ 76.00%    │
+      │ Precision   │ 75.96%    │
+      │ Recall      │ 76.00%    │
+      │ F1-Score    │ 75.74%    │
+      └─────────────┴───────────┘
+   
+   2. VISUALISASI:
+      • Bar Chart: Perbandingan 4 metrik
+      • Radar Chart: Performa model dalam bentuk radar
+      • Confusion Matrix: Tabel 3x3 (Gaming, Photographer, Daily)
+      • Classification Report: Metrik per kelas
+   
+   3. SKENARIO:
+      • 70% Training (700 data)
+      • 30% Testing (300 data)
+      • Metode: Majority Voting dengan K=5
+
+E. HALAMAN ADMIN (/admin)
+─────────────────────────────────────────────────────────────────────────────
+   • Melihat dan mengubah bobot atribut
+   • Preset bobot: Default, Gaming Focus, Camera Focus
+   • Dashboard statistik sistem
+   • Tombol reset ke bobot default
+
+================================================================================
+                  4. OUTPUT EVALUASI & VISUALISASI
+================================================================================
+
+A. FILE OUTPUT (folder: outputs/)
+─────────────────────────────────────────────────────────────────────────────
+
+1. metrics_report.txt
+   File teks berisi laporan lengkap evaluasi:
+   • Tanggal evaluasi
+   • Bobot yang digunakan
+   • Metrik: Accuracy, Precision, Recall, F1-Score
+   • Classification Report per kelas
+   • Confusion Matrix dalam format tabel
+   • Summary perbandingan skenario
+
+2. confusion_matrix.png
+   Visualisasi confusion matrix dalam bentuk heatmap:
+   • Warna biru menunjukkan intensitas
+   • Angka di setiap sel menunjukkan jumlah prediksi
+   • Label: Gaming, Photographer, Daily
+
+3. evaluation_results.json
+   Data hasil evaluasi dalam format JSON:
+   • Dapat digunakan untuk integrasi dengan sistem lain
+   • Berisi semua metrik dan confusion matrix
+
+B. CONFUSION MATRIX (3x3)
+─────────────────────────────────────────────────────────────────────────────
+                        PREDICTED
+                    Gaming  Photo   Daily
+   ACTUAL Gaming      24      8       9     (41 total)
+         Photo.        7    122      17    (146 total)
+         Daily         1     30      82    (113 total)
+
+   Interpretasi:
+   • 24 HP Gaming diprediksi benar sebagai Gaming
+   • 122 HP Photographer diprediksi benar sebagai Photographer
+   • 82 HP Daily diprediksi benar sebagai Daily
+   • Total prediksi benar: 228 dari 300 (76%)
+
+C. CLASSIFICATION REPORT
+─────────────────────────────────────────────────────────────────────────────
+   ┌──────────────┬───────────┬────────┬──────────┬─────────┐
+   │ Label        │ Precision │ Recall │ F1-Score │ Support │
+   ├──────────────┼───────────┼────────┼──────────┼─────────┤
+   │ Gaming       │ 75%       │ 59%    │ 66%      │ 41      │
+   │ Photographer │ 76%       │ 84%    │ 80%      │ 146     │
+   │ Daily        │ 76%       │ 73%    │ 74%      │ 113     │
+   ├──────────────┼───────────┼────────┼──────────┼─────────┤
+   │ Weighted Avg │ 76%       │ 76%    │ 76%      │ 300     │
+   └──────────────┴───────────┴────────┴──────────┴─────────┘
+
+D. VISUALISASI CHART
+─────────────────────────────────────────────────────────────────────────────
+
+1. BAR CHART (Perbandingan Metrik):
+   • 4 batang warna berbeda
+   • Indigo: Accuracy (76%)
+   • Teal: Precision (75.96%)
+   • Amber: Recall (76%)
+   • Pink: F1-Score (75.74%)
+
+2. RADAR CHART (Radar Performa):
+   • 4 titik membentuk polygon
+   • Semakin besar area, semakin baik performa
+   • Menunjukkan keseimbangan antar metrik
+
+================================================================================
+                      5. STRUKTUR PROJECT
+================================================================================
+
+Final_Project/
+│
+├── backend/                      # Backend API (FastAPI)
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py              # Entry point FastAPI
+│   │   ├── config.py            # Konfigurasi aplikasi
+│   │   │
+│   │   ├── cbr/                 # Core CBR Engine
+│   │   │   ├── __init__.py
+│   │   │   ├── cbr_engine.py    # Engine utama CBR
+│   │   │   ├── weighted_euclidean.py  # Algoritma distance
+│   │   │   └── evaluator.py     # Evaluator model
+│   │   │
+│   │   ├── models/              # Pydantic Models
+│   │   │   ├── __init__.py
+│   │   │   ├── phone.py         # Model data HP
+│   │   │   ├── evaluation.py    # Model hasil evaluasi
+│   │   │   └── recommendation.py # Model rekomendasi
+│   │   │
+│   │   ├── routes/              # API Routes
+│   │   │   ├── __init__.py
+│   │   │   ├── recommendation.py # Endpoint rekomendasi
+│   │   │   ├── evaluation.py    # Endpoint evaluasi
+│   │   │   ├── admin.py         # Endpoint admin
+│   │   │   └── health.py        # Health check
+│   │   │
+│   │   └── utils/               # Utilities
+│   │       ├── __init__.py
+│   │       ├── data_loader.py   # Load dataset
+│   │       └── preprocessing.py # Normalisasi data
+│   │
+│   ├── scripts/                 # Scripts utilitas
+│   │   ├── prepare_data.py      # Split train/test
+│   │   ├── run_evaluation.py    # Jalankan evaluasi
+│   │   └── regenerate_labels.py # Generate label
+│   │
+│   └── requirements.txt         # Dependencies Python
+│
+├── frontend/                    # Frontend (React + Vite)
+│   ├── src/
+│   │   ├── main.jsx            # Entry point React
+│   │   ├── App.jsx             # Root component + routing
+│   │   ├── index.css           # Global styles
+│   │   │
+│   │   ├── pages/              # Halaman-halaman
+│   │   │   ├── Home.jsx        # Halaman utama
+│   │   │   ├── PhoneList.jsx   # Daftar HP
+│   │   │   ├── PhoneDetail.jsx # Detail HP
+│   │   │   ├── Recommendation.jsx # Input rekomendasi
+│   │   │   ├── Results.jsx     # Hasil rekomendasi
+│   │   │   ├── Evaluation.jsx  # Evaluasi model
+│   │   │   └── Admin.jsx       # Panel admin
+│   │   │
+│   │   ├── components/         # Komponen reusable
+│   │   │   ├── Layout.jsx      # Layout wrapper
+│   │   │   ├── Navbar.jsx      # Navigasi
+│   │   │   └── UI/             # UI components
+│   │   │
+│   │   └── utils/              # Utilities
+│   │       ├── api.js          # API client (Axios)
+│   │       └── helpers.js      # Helper functions
+│   │
+│   ├── package.json            # Dependencies Node.js
+│   └── vite.config.js          # Vite configuration
+│
+├── data/                        # Data files
+│   ├── raw/                    # Data mentah
+│   │   └── hp_dataset_raw.csv
+│   └── processed/              # Data terproses
+│       ├── hp_dataset_clean.csv
+│       ├── train_70-30.csv     # Data training (700)
+│       └── test_70-30.csv      # Data testing (300)
+│
+├── outputs/                     # Output evaluasi
+│   ├── metrics_report.txt      # Laporan metrik
+│   ├── confusion_matrix.png    # Visualisasi CM
+│   └── evaluation_results.json # Data JSON
+│
+├── data.xlsx                    # Dataset utama (1000 HP)
+└── README.md                    # Dokumentasi
+
+================================================================================
+                   6. PENJELASAN SETIAP FILE
+================================================================================
+
+A. BACKEND FILES
+─────────────────────────────────────────────────────────────────────────────
+
+1. main.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Entry point aplikasi FastAPI
+   • Inisialisasi FastAPI app
+   • Setup CORS middleware untuk komunikasi dengan frontend
+   • Register semua routes (recommendation, evaluation, admin, health)
+   • Lifespan event untuk pre-load CBR engine saat startup
+   • Global exception handler
+
+2. config.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Konfigurasi aplikasi
+   • PATH dataset Excel
+   • Default bobot untuk setiap atribut
+   • Konstanta: similarity threshold, top-K recommendations
+   • Atribut numerik dan kategorikal
+
+3. cbr_engine.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Core engine Case-Based Reasoning
+   • RETRIEVE: Mencari HP yang mirip berdasarkan query
+   • REUSE: Menggunakan HP tersebut sebagai rekomendasi
+   • REVISE: Menyesuaikan berdasarkan preferensi
+   • RETAIN: Menyimpan feedback (opsional)
+   • Menghitung similarity untuk semua HP dalam case base
+   • Mengurutkan berdasarkan similarity score
+
+4. weighted_euclidean.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Implementasi algoritma Weighted Euclidean Distance
+   Formula: d(x,y) = √(Σ wᵢ × (xᵢ - yᵢ)²)
+   • calculate_distance(): Menghitung jarak
+   • calculate_similarity(): Konversi jarak ke similarity (1/(1+d))
+   • Validasi bobot (total harus 100%)
+   • Kontribusi per atribut untuk penjelasan
+
+5. evaluator.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Evaluasi performa model CBR
+   • Split data train/test (70-30)
+   • Prediksi menggunakan Majority Voting (K=5)
+   • Hitung metrik: Accuracy, Precision, Recall, F1-Score
+   • Generate Confusion Matrix
+   • Export hasil ke file JSON
+
+6. data_loader.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Load dan validasi dataset
+   • Baca file Excel (.xlsx)
+   • Validasi kolom yang diperlukan
+   • Split train/test dengan random seed untuk reproducibility
+
+7. preprocessing.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Preprocessing dan normalisasi data
+   • Min-Max normalization untuk setiap atribut numerik
+   • Konversi resolusi kamera ke numerik (MP)
+   • Handle missing values
+   • Fit pada training, transform pada testing
+
+B. FRONTEND FILES
+─────────────────────────────────────────────────────────────────────────────
+
+1. App.jsx
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Root component dengan routing
+   • Setup React Router dengan routes ke semua halaman
+   • Wrap dengan Layout component
+
+2. Home.jsx
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Halaman utama/landing page
+   • Hero section dengan penjelasan sistem
+   • Statistik dataset dari API
+   • Quick links ke fitur lain
+
+3. PhoneList.jsx
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Menampilkan daftar HP
+   • Fetch data dari API /recommendations/phones
+   • Filter berdasarkan brand, harga, RAM
+   • Pencarian berdasarkan nama
+   • Pagination
+
+4. Recommendation.jsx
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Form input preferensi pengguna
+   • Slider untuk range harga, baterai, rating
+   • Dropdown untuk RAM, memori
+   • Submit ke API /recommendations
+   • Navigate ke Results dengan data rekomendasi
+
+5. Results.jsx
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Menampilkan hasil rekomendasi
+   • 10 HP teratas dengan similarity score
+   • Detail spesifikasi setiap HP
+   • Penjelasan matching attributes
+
+6. Evaluation.jsx
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Menampilkan evaluasi model
+   • Load hasil evaluasi dari API/static data
+   • Menampilkan 4 metrik utama
+   • Bar Chart dan Radar Chart
+   • Confusion Matrix 3x3
+   • Classification Report
+
+7. Admin.jsx
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Panel administrasi
+   • Slider untuk mengubah bobot atribut
+   • Preset bobot (Gaming, Camera, Default)
+   • Dashboard statistik
+   • Tombol reset
+
+8. api.js
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: API client menggunakan Axios
+   • Base URL configuration
+   • Interceptors untuk error handling
+   • Methods: getRecommendations, getPhones, runEvaluation, dll.
+
+C. SCRIPT FILES
+─────────────────────────────────────────────────────────────────────────────
+
+1. prepare_data.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Menyiapkan data untuk evaluasi
+   • Load dataset dari Excel
+   • Generate label (Gaming/Photographer/Daily) berdasarkan rules
+   • Split menjadi train (70%) dan test (30%)
+   • Simpan ke folder data/processed/
+
+2. run_evaluation.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Menjalankan evaluasi lengkap
+   • Load train dan test data
+   • Prediksi setiap test case dengan Majority Voting
+   • Hitung semua metrik
+   • Generate output files (txt, png, json)
+
+3. regenerate_labels.py
+   ─────────────────────────────────────────────────────────────────────────
+   Fungsi: Regenerate label jika ada perubahan rules
+   • Rules: Gaming (RAM tinggi), Photographer (Kamera tinggi), Daily
+
+================================================================================
+                    7. CARA KERJA ALGORITMA
+================================================================================
+
+A. WEIGHTED EUCLIDEAN DISTANCE
+─────────────────────────────────────────────────────────────────────────────
+
+Formula:
+   d(x, y) = √(Σ wᵢ × (xᵢ - yᵢ)²)
+
+Dimana:
+   • x = vektor fitur query (input user)
+   • y = vektor fitur case (HP dalam database)
+   • wᵢ = bobot untuk fitur ke-i (dalam persentase)
+   • (xᵢ - yᵢ)² = kuadrat selisih nilai fitur
+
+Conversion ke Similarity:
+   similarity = 1 / (1 + distance)
+
+Contoh perhitungan:
+   Query: Harga=5jt, RAM=8GB, Kamera=48MP
+   Case:  Harga=5.5jt, RAM=8GB, Kamera=64MP
+   
+   1. Normalisasi nilai (0-1)
+   2. Hitung selisih kuadrat per atribut
+   3. Kalikan dengan bobot
+   4. Jumlahkan dan akar kuadrat
+   5. Konversi ke similarity
+
+B. PROSES REKOMENDASI (CBR CYCLE)
+─────────────────────────────────────────────────────────────────────────────
+
+1. RETRIEVE
+   • User memasukkan preferensi
+   • Sistem mencari semua HP dalam case base
+   • Hitung similarity untuk setiap HP
+   • Urutkan berdasarkan similarity (descending)
+
+2. REUSE
+   • Ambil Top-K HP dengan similarity tertinggi
+   • Return sebagai rekomendasi
+
+3. REVISE
+   • User dapat mengubah bobot atribut
+   • Sistem menghitung ulang similarity
+
+4. RETAIN
+   • (Opsional) Simpan feedback user untuk improvement
+
+C. PROSES EVALUASI
+─────────────────────────────────────────────────────────────────────────────
+
+1. SPLIT DATA
+   • 1000 HP → 700 training + 300 testing
+   • Random seed = 42 untuk reproducibility
+
+2. KLASIFIKASI
+   Untuk setiap HP di test set:
+   a. Ambil sebagai query
+   b. Hitung similarity ke semua 700 HP training
+   c. Ambil 5 tetangga terdekat (K=5)
+   d. Majority voting dari label 5 tetangga
+   e. Bandingkan dengan label asli
+
+3. HITUNG METRIK
+   • Accuracy = (TP + TN) / Total
+   • Precision = TP / (TP + FP)
+   • Recall = TP / (TP + FN)
+   • F1-Score = 2 × (Precision × Recall) / (Precision + Recall)
+
+D. RULES PELABELAN
+─────────────────────────────────────────────────────────────────────────────
+
+GAMING:
+   • RAM >= 8GB DAN Baterai >= 5000mAh
+   • ATAU RAM >= 12GB
+
+PHOTOGRAPHER:
+   • Resolusi Kamera >= 64MP
+   • ATAU Resolusi Kamera >= 48MP DAN Harga >= 5jt
+
+DAILY:
+   • HP yang tidak memenuhi kriteria Gaming atau Photographer
+
+================================================================================
+                  8. CARA MENJALANKAN APLIKASI
+================================================================================
+
+A. PRASYARAT
+─────────────────────────────────────────────────────────────────────────────
+   • Python 3.9+
+   • Node.js 16+
+   • npm atau yarn
+
+B. INSTALASI BACKEND
+─────────────────────────────────────────────────────────────────────────────
+   cd backend
+   pip install -r requirements.txt
+
+C. INSTALASI FRONTEND
+─────────────────────────────────────────────────────────────────────────────
+   cd frontend
+   npm install
+
+D. MENJALANKAN APLIKASI
+─────────────────────────────────────────────────────────────────────────────
+
+Terminal 1 (Backend):
+   cd backend
+   python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+
+Terminal 2 (Frontend):
+   cd frontend
+   npm run dev
+
+E. AKSES APLIKASI
+─────────────────────────────────────────────────────────────────────────────
+   • Frontend: http://localhost:3000
+   • Backend API: http://localhost:8000
+   • API Documentation: http://localhost:8000/docs
+
+F. MENJALANKAN EVALUASI (OPSIONAL)
+─────────────────────────────────────────────────────────────────────────────
+   cd backend/scripts
+   python prepare_data.py      # Siapkan data
+   python run_evaluation.py    # Jalankan evaluasi
+
+================================================================================
+                           PENUTUP
+================================================================================
+
+Sistem rekomendasi handphone ini menggunakan pendekatan Case-Based Reasoning
+yang telah teruji dengan akurasi 76%. Sistem ini cocok untuk:
+
+• Toko online HP yang ingin memberikan rekomendasi personal
+• Pengguna yang bingung memilih HP sesuai kebutuhan
+• Pembelajaran tentang implementasi CBR dalam dunia nyata
+
+Keunggulan sistem:
+✓ Akurasi tinggi (76%)
+✓ Antarmuka modern dan responsif
+✓ Visualisasi hasil yang informatif
+✓ Bobot atribut yang dapat dikustomisasi
+✓ API yang well-documented
+
+================================================================================
+      Dibuat untuk Tugas Akhir Mata Kuliah Case-Based Reasoning
+                         © 2024
+================================================================================

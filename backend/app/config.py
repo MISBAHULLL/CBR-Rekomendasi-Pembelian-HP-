@@ -1,7 +1,5 @@
 """
-Configuration Module
-====================
-Konfigurasi aplikasi CBR Phone Recommendation System.
+Konfigurasi aplikasi CBR
 """
 
 import os
@@ -9,14 +7,10 @@ from pathlib import Path
 from pydantic_settings import BaseSettings
 from typing import Dict
 
-# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 class Settings(BaseSettings):
-    """
-    Konfigurasi aplikasi menggunakan Pydantic Settings.
-    Mendukung environment variables untuk deployment.
-    """
+    """Pydantic Settings untuk konfigurasi app."""
     
     # Application Settings
     APP_NAME: str = "CBR Phone Recommendation System"
@@ -32,23 +26,22 @@ class Settings(BaseSettings):
     # CBR Settings
     # Bobot default dalam PERSENTASE (total harus 100%)
     DEFAULT_WEIGHTS: Dict[str, float] = {
-        "Harga": 25.0,              # 25% - Harga sangat penting
-        "Ram": 15.0,                # 15% - RAM untuk performa
+        "Harga": 20.0,              # 20% - Harga penting
+        "Ram": 20.0,                # 20% - RAM untuk performa (Gaming)
         "Memori_internal": 10.0,    # 10% - Storage
         "Kapasitas_baterai": 15.0,  # 15% - Daya tahan baterai
-        "Resolusi_kamera": 15.0,    # 15% - Kualitas kamera
+        "Resolusi_kamera_num": 20.0,# 20% - Kualitas kamera (Photographer)
         "Ukuran_layar": 5.0,        # 5% - Ukuran layar
-        "Rating_pengguna": 15.0     # 15% - Rating user
+        "Rating_pengguna": 10.0     # 10% - Rating user
     }
     
     # Similarity Threshold
     SIMILARITY_THRESHOLD: float = 0.5  # Minimum similarity untuk rekomendasi
     TOP_K_RECOMMENDATIONS: int = 10    # Jumlah rekomendasi maksimum
     
-    # Evaluation Settings
+    # Evaluation Settings - Hanya 70-30 split
     TRAIN_TEST_SPLITS: list = [
-        {"train": 70, "test": 30},
-        {"train": 80, "test": 20}
+        {"train": 70, "test": 30}
     ]
     
     class Config:

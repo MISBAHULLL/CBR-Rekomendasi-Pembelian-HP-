@@ -1,7 +1,5 @@
 """
-Recommendation Routes
-=====================
-API endpoints untuk sistem rekomendasi handphone.
+API endpoints untuk rekomendasi HP
 """
 
 from fastapi import APIRouter, HTTPException, Query, Body

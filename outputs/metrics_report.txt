@@ -1,0 +1,58 @@
+======================================================================
+CBR PHONE RECOMMENDATION - EVALUATION REPORT
+======================================================================
+Generated: 2025-12-22 10:19:15
+Method: Weighted Euclidean Distance with Majority Voting (K=5)
+
+WEIGHTS USED:
+----------------------------------------
+  Harga: 20.0%
+  Ram: 20.0%
+  Memori_internal: 10.0%
+  Kapasitas_baterai: 15.0%
+  Resolusi_kamera_num: 20.0%
+  Ukuran_layar: 5.0%
+  Rating_pengguna: 10.0%
+
+======================================================================
+SCENARIO: 70-30
+======================================================================
+Training Size: 700
+Testing Size: 300
+K Neighbors: 5
+
+EVALUATION METRICS:
+----------------------------------------
+  Accuracy:  76.00%
+  Precision: 75.96%
+  Recall:    76.00%
+  F1-Score:  75.74%
+
+CLASSIFICATION REPORT:
+----------------------------------------
+              precision    recall  f1-score   support
+
+      Gaming       0.75      0.59      0.66        41
+Photographer       0.76      0.84      0.80       146
+       Daily       0.76      0.73      0.74       113
+
+    accuracy                           0.76       300
+   macro avg       0.76      0.72      0.73       300
+weighted avg       0.76      0.76      0.76       300
+
+CONFUSION MATRIX:
+----------------------------------------
+              Predicted
+              Gaming  Photo   Daily
+Actual Gaming      24       8       9
+Actual Photo.       7     122      17
+Actual Daily        1      30      82
+
+======================================================================
+SUMMARY COMPARISON
+======================================================================
+Scenario     Accuracy     Precision    Recall       F1-Score    
+------------------------------------------------------------
+70-30        76.00        75.96        76.00        75.74       
+
+BEST SCENARIO: 70-30 (F1-Score: 75.74%)

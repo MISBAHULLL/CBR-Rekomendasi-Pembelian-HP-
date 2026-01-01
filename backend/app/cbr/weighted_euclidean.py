@@ -1,19 +1,7 @@
 """
-Weighted Euclidean Distance Module
-==================================
-Implementasi perhitungan jarak Weighted Euclidean untuk CBR.
-
-Formula:
-d(x, y) = sqrt(Σ w_i * (x_i - y_i)²)
-
-Di mana:
-- x = vektor fitur query (input user)
-- y = vektor fitur case (HP dalam database)
-- w_i = bobot untuk fitur ke-i (dalam persentase, total 100%)
-- (x_i - y_i)² = kuadrat selisih nilai fitur
-
+Weighted Euclidean Distance untuk CBR
+Formula: d(x, y) = sqrt(Σ w_i * (x_i - y_i)²)
 Similarity = 1 / (1 + distance)
-Atau: Similarity = 1 - (distance / max_distance)
 """
 
 import numpy as np
@@ -25,16 +13,8 @@ logger = logging.getLogger(__name__)
 
 class WeightedEuclideanDistance:
     """
-    Class untuk menghitung Weighted Euclidean Distance.
-    
-    Bobot diberikan dalam PERSENTASE (0-100), bukan desimal.
-    Total bobot harus 100%.
-    
-    Example:
-        >>> weights = {"Harga": 25, "Ram": 20, "Baterai": 15, ...}
-        >>> wed = WeightedEuclideanDistance(weights)
-        >>> distance = wed.calculate_distance(query_vector, case_vector)
-        >>> similarity = wed.calculate_similarity(query_vector, case_vector)
+    Calculator untuk Weighted Euclidean Distance.
+    Bobot dalam PERSENTASE (0-100), total harus 100%.
     """
     
     # Atribut default yang digunakan untuk perhitungan

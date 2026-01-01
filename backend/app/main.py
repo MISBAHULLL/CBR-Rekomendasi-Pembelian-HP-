@@ -1,11 +1,5 @@
 """
-CBR Phone Recommendation API
-============================
-Main FastAPI application untuk Sistem Rekomendasi Handphone
-menggunakan Case-Based Reasoning dengan Weighted Euclidean Distance.
-
-Author: CBR Team
-Version: 1.0.0
+CBR Phone Recommendation API - FastAPI application
 """
 
 from fastapi import FastAPI, Request
@@ -24,7 +18,6 @@ from .routes import (
 )
 from .cbr import get_cbr_engine
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -34,9 +27,7 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """
-    Lifespan context manager untuk startup dan shutdown.
-    """
+    """Startup dan shutdown handler."""
     # Startup
     logger.info("Starting CBR Phone Recommendation API...")
     

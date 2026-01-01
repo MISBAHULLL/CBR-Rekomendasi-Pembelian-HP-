@@ -1,7 +1,5 @@
 """
-Evaluation Models
-=================
-Pydantic models untuk hasil evaluasi model CBR.
+Pydantic models untuk hasil evaluasi CBR
 """
 
 from pydantic import BaseModel, Field

@@ -180,6 +180,10 @@ npm run dev
 - `PUT /api/v1/admin/weights` - Update weights
 - `POST /api/v1/admin/phones` - Add new phone
 
+![Home](Beranda.png)
+![Rekomendasi](Rekomendasi.png)
+![Evaluasi](Evaluasi.png)
+
 ## 📝 License
 
 MIT License - feel free to use for educational purposes.

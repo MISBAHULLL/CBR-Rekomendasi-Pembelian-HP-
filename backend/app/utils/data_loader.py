@@ -1,13 +1,5 @@
 """
-Data Loader Module
-==================
-Modul untuk memuat dan memvalidasi dataset handphone dari file Excel.
-
-Fitur:
-- Load dataset dari Excel (.xlsx)
-- Validasi struktur data
-- Handle missing values
-- Convert ke format yang sesuai untuk CBR
+Loader untuk dataset HP dari file Excel
 """
 
 import pandas as pd
@@ -17,25 +9,12 @@ from typing import Optional, List, Dict, Tuple
 import logging
 import re
 
-# Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
 class DataLoader:
-    """
-    Class untuk memuat dataset handphone dari file Excel.
-    
-    Attributes:
-        file_path (str): Path ke file Excel
-        df (pd.DataFrame): DataFrame yang dimuat
-        is_loaded (bool): Status apakah data sudah dimuat
-    
-    Example:
-        >>> loader = DataLoader("data.xlsx")
-        >>> df = loader.load()
-        >>> print(f"Loaded {len(df)} phones")
-    """
+    """Loader untuk dataset HP dari Excel dengan validasi."""
     
     # Kolom yang diharapkan dalam dataset
     REQUIRED_COLUMNS = [

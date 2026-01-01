@@ -15,7 +15,7 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    timeout: 30000,
+    timeout: 300000, // 5 minutes timeout for evaluation process
 });
 
 // Request interceptor

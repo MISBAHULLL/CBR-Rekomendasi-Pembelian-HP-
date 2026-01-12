@@ -53,15 +53,24 @@ class CBREngine:
         
         logger.info(f"Loading case base from: {file_path}")
         
-        # Load data
-        self.data_loader = DataLoader(file_path)
-        self.case_base = self.data_loader.load(validate=True)
-        
-        # Preprocess and normalize
-        self.case_base_normalized = self.preprocessor.fit_transform(self.case_base)
-        
-        self.is_initialized = True
-        logger.info(f"Case base loaded: {len(self.case_base)} cases")
+        try:
+            # Load data
+            self.data_loader = DataLoader(file_path)
+            self.case_base = self.data_loader.load(validate=True)
+            
+            # Preprocess and normalize
+            self.case_base_normalized = self.preprocessor.fit_transform(self.case_base)
+            
+            self.is_initialized = True
+            logger.info(f"Case base loaded: {len(self.case_base)} cases")
+            
+        except Exception as e:
+            logger.error(f"Failed to load case base: {e}")
+            # Initialize with empty DataFrame to prevent None errors
+            self.case_base = pd.DataFrame()
+            self.case_base_normalized = pd.DataFrame()
+            self.is_initialized = False
+            raise
         
     def set_weights(self, weights: Dict[str, float]) -> None:
         """
@@ -641,6 +650,10 @@ def get_cbr_engine() -> CBREngine:
     
     if _cbr_engine is None:
         _cbr_engine = CBREngine()
-        _cbr_engine.load_case_base()
+        try:
+            _cbr_engine.load_case_base()
+        except Exception as e:
+            logger.error(f"Failed to initialize CBR engine: {e}")
+            # Return engine with empty case base for error handling
     
     return _cbr_engine

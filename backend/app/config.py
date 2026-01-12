@@ -15,13 +15,17 @@ class Settings(BaseSettings):
     # Application Settings
     APP_NAME: str = "CBR Phone Recommendation System"
     APP_VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
+    
+    # Server Settings
+    HOST: str = os.getenv("HOST", "0.0.0.0")
+    PORT: int = int(os.getenv("PORT", "8000"))
     
     # API Settings
     API_PREFIX: str = "/api/v1"
     
-    # Dataset Path
-    DATASET_PATH: str = str(BASE_DIR / "data.xlsx")
+    # Dataset Path - Railway compatible
+    DATASET_PATH: str = os.getenv("DATASET_PATH", str(BASE_DIR / "data.xlsx"))
     
     # CBR Settings
     # Bobot default dalam PERSENTASE (total harus 100%)

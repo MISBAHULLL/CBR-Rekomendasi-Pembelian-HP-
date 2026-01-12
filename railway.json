@@ -4,8 +4,6 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "numReplicas": 1,
-    "sleepApplication": false,
-    "restartPolicyType": "ON_FAILURE"
+    "startCommand": "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
   }
 }
